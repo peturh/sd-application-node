@@ -86,10 +86,14 @@ public class Database {
 			
 			
 			while (rs.next()) {
-
-				rs.first();
-				rs.getString(1);
-				System.out.println("Hej");
+				ResultSetMetaData rsmd = rs.getMetaData();
+				int count = rsmd.getColumnCount();
+				
+				for(int i=1; i < count+1; i++){
+					System.out.print(rs.getString(i) + " ");
+				}
+				System.out.println();
+				
 			}
 
 			stmt.close();
