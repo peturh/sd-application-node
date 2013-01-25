@@ -62,13 +62,12 @@ public String result(ResultSet rs){
 	StringBuilder sb = new StringBuilder();
 	try {
 		rs.last();
-		ResultSetMetaData rsmd = rs.getMetaData();
-		int count = rsmd.getColumnCount();
-		
-		for(int i=1; i < count+1; i++){
-			sb.append(rs.getString(i) + " ");
-			
-		}
+		//ResultSetMetaData rsmd = rs.getMetaData();
+		//int count = rsmd.getColumnCount();
+		 
+		sb.append("STATE: "+rs.getString(8) + " ");
+		//for(int i=1; i < count+1; i++){
+		//}
 		
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
