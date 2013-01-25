@@ -1,1 +1,13 @@
-HELLO WORLD
+#############################################
+          An generic application node
+          
+This is made for testing the backend communicating
+with the database. It relays on an gateway
+which communicates with nodes which activity
+is logged in a database.
+
+This project is meant to be a testing enviroment
+and in the end an illustration of the program which 
+purpose is to send and receive ASCII.
+
+##############################################
