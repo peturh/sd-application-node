@@ -1,5 +1,6 @@
 package database;
 
+
 import java.sql.*;
 
 /**
@@ -87,7 +88,7 @@ public class Database {
 			while (rs.next()) {
 
 				rs.first();
-				
+				rs.getString(1);
 				System.out.println("Hej");
 			}
 
