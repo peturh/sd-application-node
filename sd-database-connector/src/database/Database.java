@@ -12,6 +12,8 @@ public class Database {
 	 * The database connection.
 	 */
 	private Connection conn;
+	
+	private int latest;
 
 	/**
 	 * An SQL statement object.
@@ -24,6 +26,7 @@ public class Database {
 	 */
 	public Database() {
 		conn = null;
+		latest=0;
 	}
 
 	/**
@@ -55,6 +58,26 @@ public class Database {
 		}
 		return true;
 	}
+public String result(ResultSet rs){
+	StringBuilder sb = new StringBuilder();
+	try {
+		rs.last();
+		//ResultSetMetaData rsmd = rs.getMetaData();
+		//int count = rsmd.getColumnCount();
+		 
+		sb.append("STATE: "+rs.getString(8) + " ");
+		//for(int i=1; i < count+1; i++){
+		//}
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	return sb.toString();
+	
+	
+}
 
 	/**
 	 * Close the connection to the database.
@@ -82,22 +105,22 @@ public class Database {
 		ResultSet rs = null;
 		try {
 			rs = stmt.executeQuery(query);
-
 			
-			
-			while (rs.next()) {
-				ResultSetMetaData rsmd = rs.getMetaData();
-				int count = rsmd.getColumnCount();
-				
-				for(int i=1; i < count+1; i++){
-					System.out.print(rs.getString(i) + " ");
-				}
-				System.out.println();
+			int size =0;
+			while(rs.next()){
+				size++;
 				
 			}
+			if(latest == 0){
+				latest = size;
+			}
+			if(size > latest){
+				System.out.println(result(rs));
+				latest=size;
+				}
+			
+			
 
-			stmt.close();
-			rs.close();
 
 		} catch (SQLException e) {
 
@@ -105,4 +128,5 @@ public class Database {
 		}
 
 	}
+	
 }
