@@ -3,7 +3,7 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>web.sd.app.server.GreetingServiceImpl</servlet-class>
+    <servlet-class>sd.web.app.server.GreetingServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>

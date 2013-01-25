@@ -1,0 +1,2 @@
+serviceClass: sd.web.app.client.GreetingService
+path: E21787648B52EB7EA2C33F380A09DABA.gwt.rpc
