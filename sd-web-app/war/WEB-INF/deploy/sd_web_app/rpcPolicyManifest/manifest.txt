@@ -1,3 +1,0 @@
-# Module sd_web_app
-# RPC service class, partial path of RPC policy file
-sd.web.app.client.GreetingService, E21787648B52EB7EA2C33F380A09DABA.gwt.rpc
