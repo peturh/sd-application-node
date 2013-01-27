@@ -1,0 +1,59 @@
+/*******************************************************************************
+ * Copyright 2011 Google Inc. All Rights Reserved.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
+package sd.web.app.client;
+
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Image;
+
+/**
+ * Entry point classes define <code>onModuleLoad()</code>.
+ */
+public class SdWebApp implements EntryPoint {
+	public void onModuleLoad() {
+		RootPanel rootPanel = RootPanel.get();
+		
+		VerticalPanel verticalPanel = new VerticalPanel();
+		rootPanel.add(verticalPanel, 150, 136);
+		verticalPanel.setSize("542px", "243px");
+		
+		Button buttonQuery = new Button("Do db query");
+		buttonQuery.setText("Do Query");
+		verticalPanel.add(buttonQuery);
+		
+		Label lblDbquery = new Label("No query sent");
+		verticalPanel.add(lblDbquery);
+		
+		Label lblTheAsciiCommand = new Label("The ASCII command to be sent to the node");
+		verticalPanel.add(lblTheAsciiCommand);
+		
+		TextBox textBox = new TextBox();
+		verticalPanel.add(textBox);
+		
+		Button btnSendCommand = new Button("Send command");
+		verticalPanel.add(btnSendCommand);
+		
+		Image image = new Image("verisure.jpg");
+		rootPanel.add(image, 10, 10);
+		image.setSize("169px", "100px");
+	}
+}

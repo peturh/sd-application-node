@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+    div#container
+{
+ margin-left: auto;
+ margin-right: auto;
+ width:480px;
+}
+        </style>
+		
+		<link type="text/css" rel="stylesheet" href="SdWebApp.css">
+	
+		
+		<title>Verisure General Purpose Node</title>
+
+		<script language="javascript" src="sd.web.app.SdWebApp/sd.web.app.SdWebApp.nocache.js"></script>
+		
+	</head>
+
+
+<body>
+<div id="container" align="center">
+
+
+</div>
+</body>
+  
+  
+	
+</html>
