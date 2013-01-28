@@ -101,6 +101,7 @@ public class SdWebApp implements EntryPoint {
 		TextArea textArea = new TextArea();
 		textArea.setText("Text to be sent");
 		sendPanel.add(textArea);
+		textArea.setHeight("71px");
 
 		Button btnSend = new Button("Send");
 		btnSend.setStyleName("button");
