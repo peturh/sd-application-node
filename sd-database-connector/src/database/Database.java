@@ -89,9 +89,8 @@ public class Database {
 		try {
 			rs = stmt.executeQuery(query);
 			
-
 			while(rs.next()){
-				sb.append(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3)+" ");
+				sb.append(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3)+" \n" );
 				
 
 				}

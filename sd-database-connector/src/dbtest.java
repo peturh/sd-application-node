@@ -14,8 +14,8 @@ public class dbtest {
 		long t= System.currentTimeMillis();
 		long end = t+60000;
 		while(System.currentTimeMillis() < end) {
-		  db.doStatement("select * from test.dev;");
-		  
+		String  s = db.doStatement("select * from test.dev;");
+		  System.out.println(s);
 		  try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
