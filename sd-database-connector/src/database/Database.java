@@ -64,7 +64,7 @@ public String result(ResultSet rs){
 		//rs.last();
 		//ResultSetMetaData rsmd = rs.getMetaData();
 		//int count = rsmd.getColumnCount();
-		 System.out.println(rs.getString(1));
+		 System.out.println(rs.getString(1)+ " "+ rs.getString(2) + " " + rs.getString(3));
 		//sb.append("STATE: "+rs.getString(1) + " ");
 		//for(int i=1; i < count+1; i++){
 		//}
