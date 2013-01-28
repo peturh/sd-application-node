@@ -19,6 +19,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -34,69 +35,66 @@ import com.google.gwt.user.client.ui.HorizontalSplitPanel;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.TextArea;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class SdWebApp implements EntryPoint {
 	public void onModuleLoad() {
-		RootPanel rootPanel = RootPanel.get();
+		RootLayoutPanel rootLayoutPanel = RootLayoutPanel.get();
+		rootLayoutPanel.setSize("auto", "auto");
+		rootLayoutPanel.setStyleName("button");
 
-		
+		LayoutPanel layoutPanel = new LayoutPanel();
+		rootLayoutPanel.add(layoutPanel);
+
 		VerticalPanel verticalPanel = new VerticalPanel();
-		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		verticalPanel.setStyleName("body");
-	
-		rootPanel.add(verticalPanel, 10, 10);
-		verticalPanel.setSize("480px", "372px");
-		
+		verticalPanel
+				.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		layoutPanel.add(verticalPanel);
+
 		Image image = new Image("verisure.jpg");
 		verticalPanel.add(image);
-		
 		image.setSize("266px", "161px");
-		
+
 		TabPanel tabPanel = new TabPanel();
+		tabPanel.setAnimationEnabled(true);
+		tabPanel.setStyleName("body");
 		verticalPanel.add(tabPanel);
 		tabPanel.setSize("auto", "auto");
-		tabPanel.setStyleName("body");
-		
+
 		VerticalPanel receivePanel = new VerticalPanel();
-		receivePanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		receivePanel
+				.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		tabPanel.add(receivePanel, "Receive ASCII", false);
 		receivePanel.setSize("5cm", "3cm");
-		
-		Button receiveButton = new Button("Receive");
-		receiveButton.addClickHandler(new ClickHandler() {
-			
-			
-			public void onClick(ClickEvent event) {
-				
-				//DO DATABASE QUERY AND PRESENT
-			}
-		});
-		
-		
-		receivePanel.add(receiveButton);
-		
-		Label lblThisLabelWill = new Label("The query will be presented here");
-		receivePanel.add(lblThisLabelWill);
-		
+
+		Button btnReceive = new Button("Receive");
+		btnReceive.setStyleName("button");
+		receivePanel.add(btnReceive);
+
+		Label label = new Label("The query will be presented here");
+		receivePanel.add(label);
+
 		VerticalPanel sendPanel = new VerticalPanel();
-		sendPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		sendPanel
+				.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		tabPanel.add(sendPanel, "Send ASCII", false);
 		sendPanel.setSize("5cm", "3cm");
 		
-		TextBox sendTextField = new TextBox();
-		sendTextField.setText("The text to be sent to the Node");
-		sendPanel.add(sendTextField);
-		
-		Button sendButton = new Button("Send");
-		sendPanel.add(sendButton);
-		
-		Label lblAMasterThesis = new Label("A Master Thesis Project by Pétur and David");
-		verticalPanel.add(lblAMasterThesis);
-		
+		TextArea txtrTextToBe = new TextArea();
+		txtrTextToBe.setText("Text to be sent");
+		sendPanel.add(txtrTextToBe);
 
-		
+		Button btnSend = new Button("Send");
+		btnSend.setStyleName("button");
+		sendPanel.add(btnSend);
+
+		Label lblMaster = new Label("A Master Thesis Project by Pétur and David");
+		verticalPanel.add(lblMaster);
+
 	}
 }

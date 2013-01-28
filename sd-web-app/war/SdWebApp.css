@@ -13,4 +13,8 @@ body{
 	width: 480px;
 	  text-align: center;
 	}
+.button {
+  display: block;
+  font-size: 18pt;
+}
 
