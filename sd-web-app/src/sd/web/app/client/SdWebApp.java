@@ -14,6 +14,7 @@
  *******************************************************************************/
 package sd.web.app.client;
 
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -76,22 +77,46 @@ public class SdWebApp implements EntryPoint {
 		btnReceive.setStyleName("button");
 		receivePanel.add(btnReceive);
 
-		Label label = new Label("The query will be presented here");
-		receivePanel.add(label);
+		Label lblReceive = new Label("The query will be presented here");
+		receivePanel.add(lblReceive);
 
+		btnReceive.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				
+				
+				/*
+				 * TODO: Make function create a Database query that returns a string. 
+				 *      lblReceive.setText(String text);
+				 */
+				
+			}
+		});
+		
 		VerticalPanel sendPanel = new VerticalPanel();
 		sendPanel
 				.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		tabPanel.add(sendPanel, "Send ASCII", false);
 		sendPanel.setSize("5cm", "3cm");
 		
-		TextArea txtrTextToBe = new TextArea();
-		txtrTextToBe.setText("Text to be sent");
-		sendPanel.add(txtrTextToBe);
+		TextArea textArea = new TextArea();
+		textArea.setText("Text to be sent");
+		sendPanel.add(textArea);
 
 		Button btnSend = new Button("Send");
 		btnSend.setStyleName("button");
 		sendPanel.add(btnSend);
+		btnSend.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				
+				/*
+				 * TODO: Take text in textArea send to xbn.
+				 *    String sendString =  textArea.getText();
+				 *    
+				 */
+				
+			}
+		});
+		
 
 		Label lblMaster = new Label("A Master Thesis Project by Pétur and David");
 		verticalPanel.add(lblMaster);
