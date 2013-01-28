@@ -45,7 +45,7 @@ public class Database {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://172.30.41.98/", userName,
+					"jdbc:mysql://192.168.0.13", userName,
 					password);
 			
 			stmt = conn.createStatement();
@@ -61,11 +61,11 @@ public class Database {
 public String result(ResultSet rs){
 	StringBuilder sb = new StringBuilder();
 	try {
-		rs.last();
+		//rs.last();
 		//ResultSetMetaData rsmd = rs.getMetaData();
 		//int count = rsmd.getColumnCount();
-		 
-		sb.append("STATE: "+rs.getString(8) + " ");
+		 System.out.println(rs.getString(1));
+		//sb.append("STATE: "+rs.getString(1) + " ");
 		//for(int i=1; i < count+1; i++){
 		//}
 		
@@ -106,17 +106,17 @@ public String result(ResultSet rs){
 		try {
 			rs = stmt.executeQuery(query);
 			
-			int size =0;
+//			int size =0;
 			while(rs.next()){
-				size++;
-				
-			}
-			if(latest == 0){
-				latest = size;
-			}
-			if(size > latest){
+//				size++;
+//				
+//			}
+//			if(latest == 0){
+//				latest = size;
+//			}
+//			if(size > latest){
 				System.out.println(result(rs));
-				latest=size;
+//				latest=size;
 				}
 			
 			
