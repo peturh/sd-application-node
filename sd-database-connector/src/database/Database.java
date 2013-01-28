@@ -58,26 +58,8 @@ public class Database {
 		}
 		return true;
 	}
-public String result(ResultSet rs){
-	StringBuilder sb = new StringBuilder();
-	try {
-		//rs.last();
-		//ResultSetMetaData rsmd = rs.getMetaData();
-		//int count = rsmd.getColumnCount();
-		 System.out.println(rs.getString(1)+ " "+ rs.getString(2) + " " + rs.getString(3));
-		//sb.append("STATE: "+rs.getString(1) + " ");
-		//for(int i=1; i < count+1; i++){
-		//}
-		
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-	return sb.toString();
-	
-	
-}
+
+
 
 	/**
 	 * Close the connection to the database.
@@ -101,31 +83,27 @@ public String result(ResultSet rs){
 		return conn != null;
 	}
 
-	public void doStatement(String query) {
+	public String doStatement(String query) {
 		ResultSet rs = null;
+		StringBuilder sb = new StringBuilder();
 		try {
 			rs = stmt.executeQuery(query);
 			
-//			int size =0;
+
 			while(rs.next()){
-//				size++;
-//				
-//			}
-//			if(latest == 0){
-//				latest = size;
-//			}
-//			if(size > latest){
-				System.out.println(result(rs));
-//				latest=size;
+				sb.append(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3)+" ");
+				
+
 				}
 			
 			
-
+			
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
+		return sb.toString();
 
 	}
 	

@@ -1,8 +1,5 @@
 import database.Database;
 
-
-
-
 public class dbtest {
 
 	/**
