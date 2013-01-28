@@ -1,0 +1,94 @@
+/*******************************************************************************
+ * Copyright 2011 Google Inc. All Rights Reserved.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
+package sd.web.app.client;
+
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.DecoratedStackPanel;
+import com.google.gwt.user.client.ui.VerticalSplitPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.TabPanel;
+import com.google.gwt.user.client.ui.DecoratorPanel;
+import com.google.gwt.user.client.ui.HorizontalSplitPanel;
+import com.google.gwt.user.client.ui.PushButton;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.dom.client.Style.Unit;
+
+/**
+ * Entry point classes define <code>onModuleLoad()</code>.
+ */
+public class SdWebApp implements EntryPoint {
+	public void onModuleLoad() {
+		RootLayoutPanel rootLayoutPanel = RootLayoutPanel.get();
+		rootLayoutPanel.setSize("auto", "auto");
+		rootLayoutPanel.setStyleName("button");
+
+		LayoutPanel layoutPanel = new LayoutPanel();
+		layoutPanel.setStyleName("body");
+		rootLayoutPanel.add(layoutPanel);
+		layoutPanel.setSize("auto", "auto");
+		rootLayoutPanel.setWidgetTopHeight(layoutPanel, 0.0, Unit.PX, 454.0,
+				Unit.PX);
+		
+		Image image = new Image("verisure.jpg");
+		layoutPanel.add(image);
+
+		Label lblAMasterThesis = new Label(
+				"A Master Thesis Project by Pétur and David");
+		lblAMasterThesis.setStyleName("h1");
+		layoutPanel.add(lblAMasterThesis);
+		layoutPanel.setWidgetLeftWidth(lblAMasterThesis, 0.0, Unit.PX, 309.0,
+				Unit.PX);
+		layoutPanel.setWidgetTopHeight(lblAMasterThesis, 417.0, Unit.PX, 37.0,
+				Unit.PX);
+
+		TabPanel tabPanel = new TabPanel();
+		layoutPanel.add(tabPanel);
+		layoutPanel.setWidgetLeftWidth(tabPanel, 0.0, Unit.PX, 362.0, Unit.PX);
+		layoutPanel.setWidgetTopHeight(tabPanel, 211.0, Unit.PX, 219.0, Unit.PX);
+		
+				VerticalPanel verticalPanel = new VerticalPanel();
+				tabPanel.add(verticalPanel, "Receive", false);
+				verticalPanel.setSize("344px", "173px");
+				
+						Button btnNewButton = new Button("New button");
+						verticalPanel.add(btnNewButton);
+						btnNewButton.setSize("192px", "50px");
+
+		VerticalPanel verticalPanel_1 = new VerticalPanel();
+		tabPanel.add(verticalPanel_1, "New tab", false);
+		verticalPanel_1.setSize("342px", "176px");
+
+		Button button = new Button("New button");
+		verticalPanel_1.add(button);
+		button.setSize("192px", "50px");
+
+		Label label = new Label("New label");
+		verticalPanel_1.add(label);
+
+	}
+}
