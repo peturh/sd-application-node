@@ -45,7 +45,7 @@ public class Database {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://192.168.0.13", userName,
+					"jdbc:mysql://172.30.41.98", userName,
 					password);
 			
 			stmt = conn.createStatement();
@@ -59,7 +59,33 @@ public class Database {
 		return true;
 	}
 
-
+public boolean changed(ResultSet rs){
+	int rows =0;
+		try {
+			if (rs.last()) {
+			    rows = rs.getRow();
+			    
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		
+if(latest==0){
+	latest=rows;
+	return false;
+}else if(latest == rows){
+	return false;
+}else if(rows > latest){
+	latest=rows;
+	return true;
+}
+	
+	
+	return false;
+}
 
 	/**
 	 * Close the connection to the database.
@@ -88,16 +114,21 @@ public class Database {
 		StringBuilder sb = new StringBuilder();
 		try {
 			rs = stmt.executeQuery(query);
+			if(changed(rs)){
+			rs.last();
+			sb.append(rs.getString(9)+" \n" );
+			String hex = Integer.toHexString(Integer.parseInt(rs.getString(9)));
 			
-			while(rs.next()){
-				sb.append(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3)+" \n" );
-				
-
-				}
+			StringBuilder output = new StringBuilder();
+		    for (int i = 0; i < hex.length(); i+=2) {
+		        String str = hex.substring(i, i+2);
+		        output.append((char)Integer.parseInt(str, 16));
+		    }
+		    System.out.println("Decimal number is "+rs.getString(9));
+		    System.out.println("HEX number is "+hex);
+		    System.out.println("Message is "+output);
+			}
 			
-			
-			
-
 		} catch (SQLException e) {
 
 			e.printStackTrace();
