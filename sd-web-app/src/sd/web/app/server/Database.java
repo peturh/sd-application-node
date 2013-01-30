@@ -46,7 +46,7 @@ public class Database {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://10.21.5.196", userName,
+					"jdbc:mysql://10.21.5.70", userName,
 					password);
 			
 			stmt = conn.createStatement();

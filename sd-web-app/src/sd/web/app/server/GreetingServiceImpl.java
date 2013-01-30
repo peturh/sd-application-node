@@ -19,10 +19,10 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		db.openConnection("root","1234");
 		String result = db.doStatement("select * from test.dev;");
 
-		// Escape data from the client to avoid cross-site script vulnerabilities.
+	//	 Escape data from the client to avoid cross-site script vulnerabilities.
 		db.closeConnection();
 
-		return "hej"; //"Hello, " + input + "!<br><br>I am running " + serverInfo
+		return result; //"Hello, " + input + "!<br><br>I am running " + serverInfo
 				//+ ".<br><br>It looks like you are using:<br>" + userAgent;
 	}
 
