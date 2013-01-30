@@ -43,11 +43,15 @@ public class Database {
 	 */
 	public boolean openConnection(String userName, String password) {
 		try {
+
+			
+			System.out.println("Lyckades foixa procyx");
 			Class.forName("com.mysql.jdbc.Driver");
+			System.out.print("Found driver");
 			conn = DriverManager.getConnection(
 					"jdbc:mysql://172.30.41.98", userName,
 					password);
-			
+			System.out.println("Connected");
 			stmt = conn.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
