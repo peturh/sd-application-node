@@ -1,6 +1,5 @@
 package database;
 
-
 import java.sql.*;
 
 /**
@@ -13,7 +12,7 @@ public class Database {
 	 */
 	private Connection conn;
 	
-	private int latest;
+	private int latest; 
 
 	/**
 	 * An SQL statement object.
@@ -24,6 +23,7 @@ public class Database {
 	 * Create the database interface object. Connection to the database is
 	 * performed later.
 	 */
+	
 	public Database() {
 		conn = null;
 		latest=0;
@@ -49,7 +49,8 @@ public class Database {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.print("Found driver");
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://172.30.41.98", userName,
+				//	"jdbc:mysql://172.30.41.98", userName,
+					"jdbc:mysql://127.0.0.1", userName,
 					password);
 			System.out.println("Connected");
 			stmt = conn.createStatement();
@@ -118,7 +119,7 @@ if(latest==0){
 		StringBuilder sb = new StringBuilder();
 		try {
 			rs = stmt.executeQuery(query);
-			if(changed(rs)){
+			//if(changed(rs)){
 			rs.last();
 			sb.append(rs.getString(9)+" \n" );
 			String hex = Integer.toHexString(Integer.parseInt(rs.getString(9)));
@@ -131,7 +132,7 @@ if(latest==0){
 		    System.out.println("Decimal number is "+rs.getString(9));
 		    System.out.println("HEX number is "+hex);
 		    System.out.println("Message is "+output);
-			}
+			//}
 			
 		} catch (SQLException e) {
 
@@ -139,6 +140,24 @@ if(latest==0){
 		}
 		return sb.toString();
 
+	}
+	
+	public String testStatement(String query){
+		
+		ResultSet rs = null;
+		String theStatement = null;
+		StringBuilder sb = new StringBuilder();
+		try {
+			rs = stmt.executeQuery(query);
+			//if(changed(rs)){
+			rs.last();
+			theStatement = rs.getString(1);
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return theStatement;
 	}
 	
 }

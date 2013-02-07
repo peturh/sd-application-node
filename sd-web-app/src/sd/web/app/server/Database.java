@@ -46,7 +46,7 @@ public class Database {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			conn = DriverManager.getConnection(
-					"jdbc:mysql://10.21.5.70", userName,
+					"jdbc:mysql://127.0.0.1", userName,
 					password);
 			
 			stmt = conn.createStatement();
@@ -86,14 +86,25 @@ public class Database {
 
 	public String doStatement(String query) {
 		ResultSet rs = null;
-		StringBuilder sb = new StringBuilder();
+		StringBuilder output = new StringBuilder();
+		StringBuilder sb = null;
 		try {
 			rs = stmt.executeQuery(query);
+			//if(changed(rs)){
+			rs.last();
+			String hex = Integer.toHexString(Integer.parseInt(rs.getString(9)));
 			
-			while(rs.next()){
-				sb.append(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3)+" \n" );
-				
-				}
+			output = new StringBuilder();
+		    for (int i = 0; i < hex.length(); i+=2) {
+		        String str = hex.substring(i, i+2);
+		        output.append((char)Integer.parseInt(str, 16));
+		    }
+		    sb = new StringBuilder();
+		    sb.append(rs.getString(9)+"\n");
+		    sb.append(hex+"\n");
+		    sb.append(output.toString());
+		   
+			//}
 			
 		} catch (SQLException e) {
 

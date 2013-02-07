@@ -36,8 +36,8 @@ public class Sd_web_app implements EntryPoint {
 	/**
 	 * Create a remote service proxy to talk to the server-side Greeting service.
 	 */
-	private final GreetingServiceAsync greetingService = GWT
-			.create(GreetingService.class);
+	private final DatabaseCallAsync greetingService = GWT
+			.create(DatabaseCall.class);
 
 	/**
 	 * This is the entry point method.
@@ -71,8 +71,8 @@ public class Sd_web_app implements EntryPoint {
 		btnReceive.setStyleName("sendButton");
 		receivePanel.add(btnReceive);
 		
-		final Label lblReceivedText = new Label("Received Text");
-		receivePanel.add(lblReceivedText);
+		final TextArea receiveText = new TextArea();
+		receivePanel.add(receiveText);
 		
 		VerticalPanel sendPanel = new VerticalPanel();
 		sendPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
@@ -80,9 +80,9 @@ public class Sd_web_app implements EntryPoint {
 		tabPanel.add(sendPanel, "Send ASCII", false);
 		sendPanel.setSize("5cm", "3cm");
 		
-		TextArea txtrTextToSend = new TextArea();
-		txtrTextToSend.setText("Text to send");
-		sendPanel.add(txtrTextToSend);
+		TextArea sendText = new TextArea();
+		sendText.setText("Text to send");
+		sendPanel.add(sendText);
 		
 		Button btnSend = new Button("Send");
 		btnSend.setStyleName("sendButton");
@@ -130,7 +130,7 @@ public class Sd_web_app implements EntryPoint {
 								 * RCP funkade inte
 								 */
 								
-								lblReceivedText.setText("Fail");
+								receiveText.setText("Fail");
 								
 							}
 
@@ -140,7 +140,7 @@ public class Sd_web_app implements EntryPoint {
 								 * 
 								 * 
 								 */
-								lblReceivedText.setText(result);
+								receiveText.setText(result);
 								
 								
 							}
