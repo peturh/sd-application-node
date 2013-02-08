@@ -1,0 +1,2 @@
+serviceClass: sd.web.app.client.DatabaseCall
+path: 976E066991DCE551D277D0D3554EEC3B.gwt.rpc
