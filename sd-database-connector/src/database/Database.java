@@ -43,14 +43,13 @@ public class Database {
 	 */
 	public boolean openConnection(String userName, String password) {
 		try {
-
 			
 			System.out.println("Lyckades foixa procyx");
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.print("Found driver");
 			conn = DriverManager.getConnection(
-				//	"jdbc:mysql://172.30.41.98", userName,
-					"jdbc:mysql://127.0.0.1", userName,
+					"jdbc:mysql://172.30.41.98", userName,
+					//"jdbc:mysql://127.0.0.1", userName,
 					password);
 			System.out.println("Connected");
 			stmt = conn.createStatement();
@@ -75,8 +74,6 @@ public boolean changed(ResultSet rs){
 			
 			e.printStackTrace();
 		}
-		
-		
 		
 if(latest==0){
 	latest=rows;
