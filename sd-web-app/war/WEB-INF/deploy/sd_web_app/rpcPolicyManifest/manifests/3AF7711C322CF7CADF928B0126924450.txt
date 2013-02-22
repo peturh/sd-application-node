@@ -1,0 +1,2 @@
+serviceClass: sd.web.app.client.RPCCall
+path: 91BF7759C8AFB285BF127560B24127D1.gwt.rpc
