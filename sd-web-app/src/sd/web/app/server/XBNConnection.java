@@ -16,7 +16,6 @@ public class XBNConnection extends DbConnection {
 	private int latest;
 	private int seq;
 	private String ack;
-	private boolean first;
 	private String timeDB;
 	private String timeGW;
 
@@ -41,7 +40,6 @@ public class XBNConnection extends DbConnection {
 			ack = "";
 			timeDB = "";
 			timeGW = "";
-			first = true;
 			conn.close();
 			result.close();
 
@@ -51,14 +49,56 @@ public class XBNConnection extends DbConnection {
 
 	}
 
+
 	/**
-	 * A function for determing if the bytes sent to the device really has
+	 * Accesses the db and requests to get the column node_faults 
+	 * 
+	 * @return the String desired, Raw hex data, ascii representation or blood value decoded in base64lite
+	 */
+	public String getNodeFaults() {
+		String query = "select * from shard03.node_faults where installation_id = 5778";
+		ArrayList<String> nodeFaults = null;
+		String text = "";
+
+		try {
+			Connection conn = getConn();
+			Statement select = conn.createStatement();
+			ResultSet result = select.executeQuery(query);
+			nodeFaults = new ArrayList<String>();
+			// int resultSize = getResultSetSize(result); //size the array
+			// int i = 0;
+			while (result.next()) {
+				nodeFaults.add(result.getString(9));
+			}
+			
+			//Parse out the latest blooddata in the nodeFaults
+			
+			//text = Parser.getBloodValue(nodeFaults);
+			//To be able to get the ASCII values from the nodefaults (warning base64 encoded characters will not be decoded).
+			//text = Parser.getText(nodeFaults);
+			
+			//To be able to show the raw hexdata
+			
+			text = Parser.getRawData(nodeFaults);
+			result.close();
+			// System.out.println("Stänger result");
+			conn.close();
+			// System.out.println("Stänger conn");
+		} catch (Exception e) {
+			// System.err.print("My SQL error " + query);
+			e.printStackTrace();
+		}
+		return text;
+	}
+	
+	/**
+	 * A function for determine if the bytes sent to the device really has
 	 * gotten there. A one sided retransmission.
 	 * 
 	 * @param theText
 	 *            is the 3 byte chunk that should be resent if no ACK is present
 	 * @param rest
-	 *            is the Restclient that should be used to send the 3 byte chunk
+	 *            is the Rest client that should be used to send the 3 byte chunk
 	 *            if no ACK is present.
 	 * @return true if the ACK is found in the database.
 	 */
@@ -129,39 +169,11 @@ public class XBNConnection extends DbConnection {
 
 	}
 
-	public String getNodeFaults() {
-		String query = "select * from shard03.node_faults where installation_id = 5778";
-		ArrayList<String> nodeFaults = null;
-		String text = "";
-
-		try {
-			Connection conn = getConn();
-			Statement select = conn.createStatement();
-			ResultSet result = select.executeQuery(query);
-			nodeFaults = new ArrayList<String>();
-			// int resultSize = getResultSetSize(result); //size the array
-			// int i = 0;
-			while (result.next()) {
-				nodeFaults.add(result.getString(9));
-			}
-			
-			//Parse out the latest blooddata in the nodeFaults
-			
-			text = Parser.getBloodValue(nodeFaults);
-			//To be able to get the ASCII values from the nodefaults (warning base64 encoded characters will not be decoded).
-			//text = Parser.getText(nodeFaults);
-			
-			result.close();
-			// System.out.println("Stänger result");
-			conn.close();
-			// System.out.println("Stänger conn");
-		} catch (Exception e) {
-			// System.err.print("My SQL error " + query);
-			e.printStackTrace();
-		}
-		return text;
-	}
-
+	/** 
+	 * A method for deleting the node_faults section in the database. Can be functional if not access to SQL editor.
+	 * 
+	 * @return true if the messeges was deleted from the database
+	 */
 	private boolean deleteMessages() {
 		String query = "delete from shard03.node_faults where installation_id = 5778";
 

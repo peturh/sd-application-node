@@ -2,9 +2,13 @@ package sd.web.app.server;
 
 import java.util.ArrayList;
 
+/**
+ * @author pethja
+ *
+ */
 public class Parser {
 
-    public String rawData(ArrayList<String> nodeFaults){
+    public static String getRawData(ArrayList<String> nodeFaults){
     	String hex = "";
 		String acks = "1094929235";
 
@@ -23,6 +27,12 @@ public class Parser {
 		return hexValue.toString();
     }
 
+	/**
+	 * A function for acquire the base64 encoded blood data
+	 * 
+	 * @param nodeFaults is the arraylist with all the values from the database represented in 4 bytes decimal form
+	 * @return the bloodvalue taken from the measurement device.
+	 */
 	public static String getBloodValue(ArrayList<String> nodeFaults) {
 		// ArrayList<String> textFaults = new ArrayList<String>();
 		String hex = "";
@@ -63,6 +73,14 @@ public class Parser {
 				/ 10 + " g/L";
 	}
 	
+	/**
+	 * A method for getting the data from the node_faults in ASCII form. 
+	 * 
+	 * !!!Warning, the database may have base64 encoded character which will show corrupt messages.!!!
+	 * 
+	 * @param nodeFaults is the arraylist with all the values from the database represented in 4 bytes decimal form
+	 * @return The ASCII representation of the text from nodefaults.
+	 */
 	public static String getText(ArrayList<String> nodeFaults){
 		StringBuilder hexToText = new StringBuilder();
 		String hex = "";
@@ -89,6 +107,12 @@ public class Parser {
     
     
     
+    /**
+     * @deprecated because the functionality of the CC1110 is not correctly implemented to function with such data
+     * 
+     * @param the whole message from the db
+     * @return the last message found in the db with an :
+     */
     private String getLastMessage(String message) {
 
 		StringBuilder sb = new StringBuilder(message);
@@ -105,14 +129,6 @@ public class Parser {
 		// Get the message into a String
 
 		lastTextMessage = sb.substring(separator + 1, message.length());
-
-		// Put the message intop the array
-		// Change start position of the string
-		// Delete message that we gathered from it
-
-		// Create size of array
-
-		// Traverse through arraylist to put it into array.
 
 		return lastTextMessage;
 
