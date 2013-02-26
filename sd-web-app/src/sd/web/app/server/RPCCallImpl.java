@@ -11,9 +11,9 @@ public class RPCCallImpl extends RemoteServiceServlet implements RPCCall {
 
 	public String queryDB() throws IllegalArgumentException {
 
-		DB_xbn db = new DB_xbn();
+		XBNConnection db = new XBNConnection();
 
-		String message = db.retrieveMessage();
+		String message = db.getNodeFaults();
 		// MessageData message = db.queryDB();
 
 		return message;
@@ -25,9 +25,9 @@ public class RPCCallImpl extends RemoteServiceServlet implements RPCCall {
 		
 		System.out.println("Texten som ska skickas är: " + theText);
 		
-		RestClient rest = new RestClient();
+		Rest rest = new Rest();
 		String chunkText = "";
-		DB_xbn db = new DB_xbn();
+		XBNConnection db = new XBNConnection();
 		StringBuilder sb = new StringBuilder(theText);
 		// Add and @ to be sure that there will never be two strings that are
 		// the same in a row.

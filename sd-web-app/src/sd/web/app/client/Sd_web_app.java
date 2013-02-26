@@ -79,7 +79,7 @@ public class Sd_web_app implements EntryPoint {
 
 		final TextArea sendText = new TextArea();
 		sendText.setSize("40cm", "5cm");
-		String textInSendTextArea = "This is a window for sending commands through the CC1110 board to the HemoCue Hb 201+ device. Send letter 'K' device version and send 'L' to get the koncentration of the blood last measured in the device";
+		String textInSendTextArea = "This is a window for sending commands through the CC1110 board to the HemoCue Hb 201+ device. 'LOG' to get the koncentration of the blood last measured in the device. To erase the log type 'DEL";
 		sendText.setText(textInSendTextArea);
 		sendPanel.add(sendText);
 
