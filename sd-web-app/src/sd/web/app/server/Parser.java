@@ -7,11 +7,16 @@ import java.util.ArrayList;
  *
  */
 public class Parser {
+	
+	/*
+	* Returns the decimal messages in the database to raw hexadecimal data.  
+	*
+	*
+	*/
 
     public static String getRawData(ArrayList<String> nodeFaults){
-    	String hex = "";
+    		String hex = "";
 		String acks = "1094929235";
-
 		StringBuilder hexValue = new StringBuilder();
 		
 		for (int i = 0; i < nodeFaults.size(); i++) {
@@ -37,8 +42,8 @@ public class Parser {
 		// ArrayList<String> textFaults = new ArrayList<String>();
 		String hex = "";
 		String acks = "1094929235";
-
 		StringBuilder hexValue = new StringBuilder();
+		
 		for (int i = 0; i < nodeFaults.size(); i++) {
 
 			if (!nodeFaults.get(i).equals(acks)) {
@@ -56,21 +61,21 @@ public class Parser {
 				}
 			}
 		}
+		
 		int position = hexValue.lastIndexOf("82");
-		System.out.println("hexvalue: " + hexValue);
-
 		String bloodValue = hexValue.substring(position + 4, position + 10);
+		System.out.println("The raw hexdata: " + hexValue. + " The base64 encoded data: "+bloodValue;
+		
 		long blood1 = Long.decode("0x" + bloodValue.substring(0, 2));
 		long blood2 = Long.decode("0x" + bloodValue.substring(2, 4));
 		long blood3 = Long.decode("0x" + bloodValue.substring(4, 6));
 
 		System.out.println("Värdet på blood1 - 3 är: " + blood1 + " " + blood2
 				+ " " + blood3);
-		String base64Value = String.valueOf(base64lite_dec((int) blood1,
-				(int) blood2, (int) blood3));
+		long base64Value =base64lite_dec((int) blood1,
+				(int) blood2, (int) blood3);
 
-		return "Senast mätta blodvärde är: " + Double.parseDouble(base64Value)
-				/ 10 + " g/L";
+		return "Senast mätta blodvärde är: " + base64Value + " g/L";
 	}
 	
 	/**
@@ -81,6 +86,7 @@ public class Parser {
 	 * @param nodeFaults is the arraylist with all the values from the database represented in 4 bytes decimal form
 	 * @return The ASCII representation of the text from nodefaults.
 	 */
+	 
 	public static String getText(ArrayList<String> nodeFaults){
 		StringBuilder hexToText = new StringBuilder();
 		String hex = "";
@@ -103,6 +109,22 @@ public class Parser {
 		}	
 		
 		return hexToText.toString();
+	}
+	
+	/*
+	*
+	* Decodes the base64lite value 
+	*@param three ints 
+	*@return the bloodvalue 
+	*/
+	
+	public static long base64lite_dec(int... numbers) {
+	long tmp; // unsigned short tmp;
+	tmp = numbers[0] & 0x3F;// tmp = *psrc & 0x3f;
+	tmp += (numbers[1] & 0x3f) << 6; // tmp += ((unsigned short)(*(psrc + 1)											// & 0x3f)) << 6;
+	tmp += (numbers[2] & 0x3f) << 12; // tmp += ((unsigned short)(*(psrc +										// 2) & 0x3f)) << 12;
+	// The value from the device is 10 times larger then expected value
+	return tmp/10;
 	}
     
     
@@ -132,16 +154,6 @@ public class Parser {
 
 		return lastTextMessage;
 
-	}
-    
-	public static long base64lite_dec(int... numbers) {
-		long tmp; // unsigned short tmp;
-		tmp = numbers[0] & 0x3F;// tmp = *psrc & 0x3f;
-		tmp += (numbers[1] & 0x3f) << 6; // tmp += ((unsigned short)(*(psrc + 1)
-											// & 0x3f)) << 6;
-		tmp += (numbers[2] & 0x3f) << 12; // tmp += ((unsigned short)(*(psrc +
-											// 2) & 0x3f)) << 12;
-		return tmp;
 	}
 }
 
