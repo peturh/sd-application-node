@@ -27,7 +27,7 @@ import backend.XBNConnection;
 
 public class GUI {
 	public int type = 0;
-	public int advType = 0;
+	public int advType = 1;
 	protected Shell shell;
 
 	/**
@@ -45,7 +45,7 @@ public class GUI {
 
 			for(int i = 0; i<100; i+=2){
 				splash.setProgress(i);
-				Thread.sleep(10);
+				Thread.sleep(25);
 			}
 
 			splash.setVisible(false);
@@ -103,18 +103,13 @@ public class GUI {
 		btnGetMeasurement.setToolTipText("Get the latest measurement from the device.");
 		
 		
-		btnGetMeasurement.setBounds(0, 30, 131, 33);
-		btnGetMeasurement.setText("Get measurement");
+		btnGetMeasurement.setBounds(0, 36, 159, 33);
+		btnGetMeasurement.setText("Get new bloodvalue");
 		
-		ScrolledComposite scrolledComposite = new ScrolledComposite(basicComposite, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		scrolledComposite.setBounds(137, 30, 291, 94);
-		scrolledComposite.setExpandHorizontal(true);
-		scrolledComposite.setExpandVertical(true);
-		
-		final StyledText receiveArea = new StyledText(scrolledComposite, SWT.READ_ONLY | SWT.WRAP);
+		final StyledText receiveArea = new StyledText(basicComposite, SWT.WRAP);
+		receiveArea.setLocation(167, 30);
+		receiveArea.setSize(259, 92);
 		receiveArea.setToolTipText("This is where the measurement will be displayd.");
-		scrolledComposite.setContent(receiveArea);
-		scrolledComposite.setMinSize(receiveArea.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		
 		Button btnBase64 = new Button(basicComposite, SWT.RADIO);
 		btnBase64.setToolTipText("Show the latest blood value (base64 encoded).");
@@ -203,6 +198,22 @@ public class GUI {
 		label.setText("A master thesis project by Pétur and David");
 		label.setFont(SWTResourceManager.getFont("Cantarell", 7, SWT.NORMAL));
 		label.setBounds(10, 204, 192, 21);
+		
+		Button btnGetDbValue = new Button(basicComposite, SWT.NONE);
+		btnGetDbValue.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				
+				XBNConnection db = new XBNConnection();
+				receiveArea.setText(db.getNodeFaults(type));
+			}
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				receiveArea.setText("Getting latest measurements from db, please wait...");
+			}
+		});
+		btnGetDbValue.setBounds(0, 71, 159, 33);
+		btnGetDbValue.setText("Get latest bloodvalue");
 		
 		/*
 		 *Get measurement from device event handler 
@@ -323,6 +334,12 @@ public class GUI {
 		advHex.setFont(SWTResourceManager.getFont("Cantarell", 9, SWT.NORMAL));
 		advHex.setBounds(66, 109, 43, 25);
 		advHex.setText("hex");
+		advHex.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				advType = 2;
+			}
+		});
 		
 		Button btnDeleteDatabase = new Button(advComposite, SWT.NONE);
 		btnDeleteDatabase.addMouseListener(new MouseAdapter() {

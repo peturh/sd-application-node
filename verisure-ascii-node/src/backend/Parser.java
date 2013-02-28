@@ -73,10 +73,10 @@ public class Parser {
 
 		System.out.println("Värdet på blood1 - 3 är: " + blood1 + " " + blood2
 				+ " " + blood3);
-		long base64Value =base64lite_dec((int) blood1,
+		double base64Value =base64lite_dec((int) blood1,
 				(int) blood2, (int) blood3);
 
-		return "Senast mätta blodvärde är: " + base64Value + " g/L";
+		return "Senast mätta blodvärde är: " + String.valueOf(base64Value)+ " g/L";
 	}
 	
 	/**
@@ -119,13 +119,15 @@ public class Parser {
 	*@return the bloodvalue 
 	*/
 	
-	public static long base64lite_dec(int... numbers) {
-	long tmp; // unsigned short tmp;
+	public static double base64lite_dec(int... numbers) {
+	double tmp; // unsigned short tmp;
 	tmp = numbers[0] & 0x3F;// tmp = *psrc & 0x3f;
 	tmp += (numbers[1] & 0x3f) << 6; // tmp += ((unsigned short)(*(psrc + 1)											// & 0x3f)) << 6;
 	tmp += (numbers[2] & 0x3f) << 12; // tmp += ((unsigned short)(*(psrc +										// 2) & 0x3f)) << 12;
 	// The value from the device is 10 times larger then expected value
+	System.out.println("tmp är "+tmp);
 	return tmp/10;
+	
 	}
     
     
