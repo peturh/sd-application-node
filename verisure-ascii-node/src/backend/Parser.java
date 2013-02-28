@@ -75,9 +75,40 @@ public class Parser {
 				+ " " + blood3);
 		double base64Value =base64lite_dec((int) blood1,
 				(int) blood2, (int) blood3);
-
+	
 		return "Senast mätta blodvärde är: " + String.valueOf(base64Value)+ " g/L";
 	}
+	
+public String dateParser(int ...bytes){
+	
+	
+		long value2 = parser.base64lite_dec(bytes[0],bytes[1],bytes[2]);
+		long value3 = parser.base64lite_dec(bytes[3],bytes[4],bytes[5]);
+		value2 = value2 | (value3 << 16);
+		
+		System.out.println(value2);
+		System.out.println(value3);
+		long seconds = value2 & 0x3f;
+		System.out.println("Seconds: " +seconds);
+		value2= value2 >> 6;
+		long minutes = value2 & 0x3f;
+		System.out.println("Minutes: "+minutes);
+		value2= value2 >> 6;
+		long hour = value2 & 0x1f;
+		System.out.println("Hour "+hour);
+		value2= value2 >> 5;
+		long day = value2 & 0x1f;
+		System.out.println("Day "+day);
+		value2= value2 >> 5;
+		long month = value2 & 0x0f;
+		System.out.println("Month "+month);
+		value2= value2 >> 4;
+		long year = value2 & 0x3f;
+		System.out.println("Year "+year);
+	return "LOL";
+	
+}
+
 	
 	/**
 	 * A method for getting the data from the node_faults in ASCII form. 
