@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/pethja/git/sd-application-node/verisure-ascii-node/libs/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="/home/pethja/git/sd-application-node/verisure-ascii-node/libs/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/home/pethja/git/sd-application-node/verisure-ascii-node/libs/fluent-hc-4.2.3.jar"/>
+	<classpathentry kind="lib" path="/home/pethja/git/sd-application-node/verisure-ascii-node/libs/httpclient-4.2.3.jar"/>
+	<classpathentry kind="lib" path="/home/pethja/git/sd-application-node/verisure-ascii-node/libs/httpclient-cache-4.2.3.jar"/>
+	<classpathentry kind="lib" path="/home/pethja/git/sd-application-node/verisure-ascii-node/libs/httpcore-4.2.2.jar"/>
+	<classpathentry kind="lib" path="/home/pethja/git/sd-application-node/verisure-ascii-node/libs/httpmime-4.2.3.jar"/>
+	<classpathentry kind="lib" path="/home/pethja/git/sd-application-node/verisure-ascii-node/libs/mysql-connector-java-5.1.7-bin.jar"/>
+	<classpathentry kind="lib" path="/home/pethja/git/sd-application-node/verisure-ascii-node/libs/swing2swt.jar"/>
+	<classpathentry kind="lib" path="/home/pethja/git/sd-application-node/verisure-ascii-node/swt.jar"/>
+	<classpathentry kind="lib" path="/home/pethja/git/sd-application-node/verisure-ascii-node/swt-debug.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
