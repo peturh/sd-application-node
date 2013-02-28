@@ -54,36 +54,53 @@ public class Parser {
 				}
 				hexValue.append(hex);
 			}
-			for (int j = 0; j < hex.length(); j += 2) {
-				String str = hex.substring(j, j + 2);
-				if (!str.equals("0d") && !str.equals("3f")) {
-					hexValue.append(str);
-					// hexToText.append((char) Long.parseLong(str, 16));
-				}
-			}
+			
 		}
 		
 		int position = hexValue.lastIndexOf("82");
-		String bloodValue = hexValue.substring(position + 4, position + 10);
-		System.out.println("The raw hexdata: " + hexValue + " The base64 encoded data: "+bloodValue);
+		String hemocuePacket = hexValue.substring(position + 4, position + 22);
+		System.out.println("The raw hexdata: " + hexValue);
+		System.out.println(" The base64 encoded data: "+hemocuePacket);
 		
-		long blood1 = Long.decode("0x" + bloodValue.substring(0, 2));
-		long blood2 = Long.decode("0x" + bloodValue.substring(2, 4));
-		long blood3 = Long.decode("0x" + bloodValue.substring(4, 6));
+		
+		long blood1 = Long.decode("0x" + hemocuePacket.substring(0, 2));
+		long blood2 = Long.decode("0x" + hemocuePacket.substring(2, 4));
+		long blood3 = Long.decode("0x" + hemocuePacket.substring(4, 6));
 
+		long bytes[] = new long[6];
+		 
+		bytes[0] = Long.decode("0x" + hemocuePacket.substring(6,8));
+		bytes[1] = Long.decode("0x" + hemocuePacket.substring(8,10));
+		bytes[2] = Long.decode("0x" + hemocuePacket.substring(10,12));
+		bytes[3] = Long.decode("0x" + hemocuePacket.substring(12,14));
+		bytes[4] = Long.decode("0x" + hemocuePacket.substring(14,16));
+		bytes[5] = Long.decode("0x" + hemocuePacket.substring(16,18));
+
+		for(int i=0; i<bytes.length;i++)
+		System.out.println("Värdet på platsen "+i+" är " +bytes[i]);
+		
+		String dateValue = dateParser(bytes);
+		
 		System.out.println("Värdet på blood1 - 3 är: " + blood1 + " " + blood2
 				+ " " + blood3);
-		double base64Value =base64lite_dec((int) blood1,
+		double base64Value = base64lite_dec((int) blood1,
 				(int) blood2, (int) blood3);
 	
-		return "Senast mätta blodvärde är: " + String.valueOf(base64Value)+ " g/L";
+		return "Senast mätta blodvärde är: " + String.valueOf(base64Value)+ " g/L " + dateValue;
 	}
+	/*
+	 * 
+	 * This method will take values from a long vector and parse out the dates.
+	 * 
+	 * @param long byte vector
+	 * @return the String with the date and time.
+	 */
 	
-public String dateParser(int ...bytes){
+public static String dateParser(long ...bytes){
 	
 	
-		long value2 = parser.base64lite_dec(bytes[0],bytes[1],bytes[2]);
-		long value3 = parser.base64lite_dec(bytes[3],bytes[4],bytes[5]);
+		long value2 = base64lite_dec((int)bytes[0],(int)bytes[1],(int)bytes[2]);
+		long value3 = base64lite_dec((int)bytes[3],(int)bytes[4],(int)bytes[5]);
 		value2 = value2 | (value3 << 16);
 		
 		System.out.println(value2);
@@ -105,7 +122,7 @@ public String dateParser(int ...bytes){
 		value2= value2 >> 4;
 		long year = value2 & 0x3f;
 		System.out.println("Year "+year);
-	return "LOL";
+		return "Time: "+String.valueOf(hour)+"-"+String.valueOf(minutes)+"-"+String.valueOf(seconds)+". Date: "+String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day);
 	
 }
 
@@ -150,14 +167,14 @@ public String dateParser(int ...bytes){
 	*@return the bloodvalue 
 	*/
 	
-	public static double base64lite_dec(int... numbers) {
-	double tmp; // unsigned short tmp;
+	public static long base64lite_dec(int... numbers) {
+	long tmp; // unsigned short tmp;
 	tmp = numbers[0] & 0x3F;// tmp = *psrc & 0x3f;
 	tmp += (numbers[1] & 0x3f) << 6; // tmp += ((unsigned short)(*(psrc + 1)											// & 0x3f)) << 6;
 	tmp += (numbers[2] & 0x3f) << 12; // tmp += ((unsigned short)(*(psrc +										// 2) & 0x3f)) << 12;
 	// The value from the device is 10 times larger then expected value
 	System.out.println("tmp är "+tmp);
-	return tmp/10;
+	return tmp;
 	
 	}
     
