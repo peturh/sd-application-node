@@ -1,6 +1,7 @@
 package ui;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class SplashScreen extends JWindow {
@@ -11,9 +12,12 @@ public class SplashScreen extends JWindow {
   JProgressBar progressBar = new JProgressBar();
   ImageIcon imageIcon;
 
-  public SplashScreen(ImageIcon imageIcon) {
+  public SplashScreen() {
   	setAlwaysOnTop(true);
-    this.imageIcon = imageIcon;
+  	ClassLoader cldr = this.getClass().getClassLoader();
+  	java.net.URL imageURL   = cldr.getResource("images/verisure.jpg");
+    ImageIcon imageIcon =   new ImageIcon(imageURL);
+
     try {
       jbInit();
       System.out.println("Lyckades inita");

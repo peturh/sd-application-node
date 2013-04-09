@@ -21,23 +21,21 @@ public class XBNConnection extends DbConnection {
 	 * database, start different variables.
 	 */
 	public XBNConnection() {
-
+			
 		try {
 			System.out.println("Lyckades skapa XBNConnection");
-			String query = "select * from shard03.node_faults where installation_id = 5778";
+			String query = "select seqno from shard03.node_faults where installation_id = 5778";
 
 			Connection conn = getConn();
 			Statement select = conn.createStatement();
 			ResultSet result = select.executeQuery(query);
 			result.last();
 
-			latest = Integer.valueOf(result.getString(4));
+			latest = Integer.valueOf(result.getString(1));
 			System.out.println("Värdet på latest när vi skapar konstruktorn: "
 					+ latest);
 			seq = 0;
 			ack = "";
-			timeDB = "";
-			timeGW = "";
 			conn.close();
 			result.close();
 			System.out.println("Stängde db");
@@ -55,7 +53,7 @@ public class XBNConnection extends DbConnection {
 	 * @return the String desired, Raw hex data, ascii representation or blood value decoded in base64lite
 	 */
 	public String getNodeFaults(int type) {
-		String query = "select * from shard03.node_faults where installation_id = 5778";
+		String query = "select fault from shard03.node_faults where installation_id = 5778";
 		ArrayList<String> nodeFaults = null;
 		String text = "";
 
@@ -67,7 +65,7 @@ public class XBNConnection extends DbConnection {
 			// int resultSize = getResultSetSize(result); //size the array
 			// int i = 0;
 			while (result.next()) {
-				nodeFaults.add(result.getString(9));
+				nodeFaults.add(result.getString(1));
 			}
 			
 			//Parse out the latest blooddata in the nodeFaults
@@ -110,7 +108,7 @@ public class XBNConnection extends DbConnection {
 	 */
 	public boolean getAck(String theText, Rest rest) {
 
-		String query = "select * from shard03.node_faults where installation_id = 5778";
+		String query = "select seqno, fault from shard03.node_faults where installation_id = 5778";
 
 		try {
 			System.out.println("Sover i en sekund i db");
@@ -119,17 +117,17 @@ public class XBNConnection extends DbConnection {
 			Statement select = conn.createStatement();
 			ResultSet result = select.executeQuery(query);
 			result.last();
-			ack = result.getString(9);
-			seq = Integer.valueOf(result.getString(4));
+			seq = Integer.valueOf(result.getString(1));
+			ack = result.getString(2);
 			System.out
 					.println("Gjorde precis ett databasanrop och kollar om:  '"
 							+ theText + "' har kommit fram.");
 			System.out.println("Sekvensnummret i databasen är: " + seq
 					+ " och latest är: " + latest);
-			timeDB = result.getString(5);
-			timeGW = result.getString(3);
-			System.out.println("Tiden i gw är: " + timeGW + ". Tiden i db är: "
-					+ timeDB);
+//			timeDB = result.getString(5);
+//			timeGW = result.getString(3);
+//			System.out.println("Tiden i gw är: " + timeGW + ". Tiden i db är: "
+//					+ timeDB);
 			// System.out.println("Skriver ut sista värdet i nodefaults: " + ack
 			// + " och seq: " + seq + " och latest: " + latest);
 
@@ -153,8 +151,8 @@ public class XBNConnection extends DbConnection {
 					Thread.sleep(3000);
 					result = select.executeQuery(query);
 					result.last();
-					ack = result.getString(9);
-					seq = Integer.valueOf(result.getString(4));
+					ack = result.getString(2);
+					seq = Integer.valueOf(result.getString(1));
 					System.out.println("Inne i while för omsändning: seq är: "
 							+ seq + " och latest är: " + latest);
 				}

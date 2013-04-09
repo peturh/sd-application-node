@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -22,6 +23,8 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import swing2swt.layout.BorderLayout;
 import backend.Rest;
 import backend.XBNConnection;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 
 
 
@@ -38,27 +41,15 @@ public class GUI {
 	public static void main(String[] args) {
 		try {
 			
-			SplashScreen splash = new SplashScreen(new ImageIcon("/home/pethja/workspace/verisure-ascii-node/verisure.jpg"));
-			splash.setLocationRelativeTo(null);
-			splash.setVisible(true);
-			//Toolkit.getDefaultToolkit().getScreenSize();
-
-			for(int i = 0; i<100; i+=2){
-				splash.setProgress(i);
-				Thread.sleep(25);
-			}
-
-			splash.setVisible(false);
-		
 			GUI window = new GUI();
-			
 			window.open();
 		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
 	/**
 	 * Open the window.
 	 */
@@ -80,7 +71,7 @@ public class GUI {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(445, 303);
+		shell.setSize(447, 310);
 		shell.setText("Verisure ASCII Node");
 		shell.setLayout(new BorderLayout(0, 0));
 		
@@ -102,11 +93,10 @@ public class GUI {
 		Button btnGetMeasurement = new Button(basicComposite, SWT.NONE);
 		btnGetMeasurement.setToolTipText("Get the latest measurement from the device.");
 		
-		
 		btnGetMeasurement.setBounds(0, 36, 159, 33);
 		btnGetMeasurement.setText("Get new bloodvalue");
 		
-		final StyledText receiveArea = new StyledText(basicComposite, SWT.WRAP);
+		final StyledText receiveArea = new StyledText(basicComposite, SWT.BORDER | SWT.WRAP);
 		receiveArea.setLocation(167, 30);
 		receiveArea.setSize(259, 92);
 		receiveArea.setToolTipText("This is where the measurement will be displayd.");
@@ -114,8 +104,6 @@ public class GUI {
 		Button btnBase64 = new Button(basicComposite, SWT.RADIO);
 		btnBase64.setToolTipText("Show the latest blood value (base64 encoded).");
 		btnBase64.setFont(SWTResourceManager.getFont("Cantarell", 9, SWT.NORMAL));
-		
-		
 		
 		btnDelMeasurments.addMouseListener(new MouseAdapter() {
 			@Override
@@ -355,6 +343,9 @@ public class GUI {
 		btnDeleteDatabase.setText("Delete database");
 		btnDeleteDatabase.setBounds(269, 192, 159, 33);
 		
+	
+		
+
 		/*
 		 * This is the advanced send button. Can send arbitary text to the device.
 		 */
@@ -416,4 +407,5 @@ public class GUI {
 		});
 
 	}
+
 }
