@@ -239,7 +239,13 @@ public class GUI {
 					}
 				}
 				while (!db.getAck(theText, rest));
-				
+				try{
+					Thread.sleep(2000);
+
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				} 
 				receiveArea.setText(db.getNodeFaults(type));
 
 			}

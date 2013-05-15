@@ -87,7 +87,9 @@ public class XBNConnection extends DbConnection {
 			
 			result.close();
 			conn.close();
+			
 			System.out.println("Stänger conn");
+			
 		} catch (Exception e) {
 			// System.err.print("My SQL error " + query);
 			e.printStackTrace();
@@ -106,13 +108,14 @@ public class XBNConnection extends DbConnection {
 	 *            if no ACK is present.
 	 * @return true if the ACK is found in the database.
 	 */
+	
 	public boolean getAck(String theText, Rest rest) {
 
 		String query = "select seqno, fault from shard03.node_faults where installation_id = 5778";
 
 		try {
 			System.out.println("Sover i en sekund i db");
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			Connection conn = getConn();
 			Statement select = conn.createStatement();
 			ResultSet result = select.executeQuery(query);
@@ -124,12 +127,6 @@ public class XBNConnection extends DbConnection {
 							+ theText + "' har kommit fram.");
 			System.out.println("Sekvensnummret i databasen är: " + seq
 					+ " och latest är: " + latest);
-//			timeDB = result.getString(5);
-//			timeGW = result.getString(3);
-//			System.out.println("Tiden i gw är: " + timeGW + ". Tiden i db är: "
-//					+ timeDB);
-			// System.out.println("Skriver ut sista värdet i nodefaults: " + ack
-			// + " och seq: " + seq + " och latest: " + latest);
 
 			if (ack.equals("1094929235") && latest == (seq - 1)) {
 				latest = seq;

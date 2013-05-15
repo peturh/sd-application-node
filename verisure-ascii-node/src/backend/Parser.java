@@ -56,10 +56,11 @@ public class Parser {
 			}
 			
 		}
-		
+		System.out.println(hexValue);
 		int position = hexValue.lastIndexOf("82");
 		System.out.println("Base64 begining position "+position +" The lenght of the packet "+hexValue.length());
-		String hemocuePacket = hexValue.substring(position + 4, position + 22);
+		String hemocuePacket = hexValue.substring(position + 4);
+				//, position + 22);
 		System.out.println("The raw hexdata: " + hexValue);
 		System.out.println(" The base64 encoded data: "+hemocuePacket);
 		
