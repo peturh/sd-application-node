@@ -20,8 +20,7 @@ public abstract class DbConnection {
 	
 
 	private String getServerURL() {
-		String url = null;
-		if (serverLocation == 1) {
+			if (serverLocation == 1) {
 			return "jdbc:mysql://172.30.41.98:3306";
 		} else {
 			return "jdbc:mysql://127.0.0.1:3306";

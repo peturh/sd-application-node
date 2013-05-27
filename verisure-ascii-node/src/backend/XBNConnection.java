@@ -6,16 +6,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-//import sd.web.app.client.MessageData;
+
 
 public class XBNConnection extends DbConnection {
 
 	private int latest;
 	private int seq;
 	private String ack;
-	private String timeDB;
-	private String timeGW;
-
+	
 	/**
 	 * The connection to the database. Initiate sequence number from the
 	 * database, start different variables.
@@ -184,7 +182,7 @@ public class XBNConnection extends DbConnection {
 		try {
 			Connection conn = getConn();
 			Statement select = conn.createStatement();
-			boolean result = select.execute(query);
+			select.execute(query);
 			conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();

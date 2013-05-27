@@ -2,10 +2,7 @@ package backend;
 
 import java.util.ArrayList;
 
-/**
- * @author pethja
- *
- */
+
 public class Parser {
 	
 	/*
@@ -180,33 +177,4 @@ public static String dateParser(long ...bytes){
 	
 	}
     
-    
-    
-    /**
-     * @deprecated because the functionality of the CC1110 is not correctly implemented to function with such data
-     * 
-     * @param the whole message from the db
-     * @return the last message found in the db with an :
-     */
-    private String getLastMessage(String message) {
-
-		StringBuilder sb = new StringBuilder(message);
-
-		int separator = 0;
-		String lastTextMessage = "";
-
-
-		separator = sb.lastIndexOf(":");
-		if (separator == -1) {
-			return "Inget meddelande att hämta";
-		}
-		System.out.println("Värdet på separator: " + separator);
-		// Get the message into a String
-
-		lastTextMessage = sb.substring(separator + 1, message.length());
-
-		return lastTextMessage;
-
-	}
 }
-
