@@ -124,7 +124,7 @@ public static String dateParser(long ...bytes){
 		value2= value2 >> 4;
 		long year = value2 & 0x3f;
 		System.out.println("Year "+year);
-		return "Time: "+String.valueOf(hour)+"-"+String.valueOf(minutes)+"-"+String.valueOf(seconds)+". Date: "+String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day);
+		return "Time: "+String.valueOf(hour)+":"+String.valueOf(minutes)+":"+String.valueOf(seconds)+". Date: 20"+String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day);
 	
 }
 
